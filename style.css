@@ -1,0 +1,425 @@
+/* ============================================================
+   Digital Tech Solutions / GenioMD — design system v4
+   Built directly from 02-GenioMD_BrandGuidelines_Jan_2025.pdf:
+   - Colors: exact primary/secondary palette + the 3-stop brand gradient
+   - Type scale: Header 48/48 ExtraBold, Sub-header 29/29 Bold,
+     Body 10/12 Regular, CTA 14 Bold (body bumped for on-screen
+     readability — see note below)
+   - Logo: actual extracted lockups in /assets
+   - Motif: soft overlapping gradient blobs + fine network/dot lines,
+     echoing the logo mark itself and the guideline cover page
+
+   Typeface note: brand spec calls for Codec Pro. Files weren't
+   supplied, so Poppins stands in — same rounded, single-story
+   geometric character as the "geniomd" wordmark, same weight scale.
+   Swap the @import below for Codec Pro when files arrive.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root{
+  /* ---- primary palette (brand guidelines 3.1) ---- */
+  --glowing-blue: #2823F5;
+  --aqua-blue:    #7CF3FF;
+  --navy-blue:    #0B0D6F;
+
+  /* ---- secondary palette (3.2) ---- */
+  --deep-purple:  #6100A0;
+  --mint-blue:    #0079A3;
+  --bright-azure: #23B0DB;
+
+  /* ---- brand gradient (3.3): aqua -> glowing blue -> navy ---- */
+  --brand-gradient: linear-gradient(135deg, #78E8FB 0%, #2823F5 55%, #0B0D6F 100%);
+
+  --white: #FFFFFF;
+  --bg: #FFFFFF;
+  --bg-alt: #F3F5FC;
+  --border: #E2E6F5;
+  --text-body: #454875;   /* body copy on light bg, per "solid" dark text guidance */
+
+  --font-display: 'Poppins', sans-serif;
+
+  /* type scale straight from brand guidelines 4.2, body bumped
+     from the print spec's 10pt for on-screen legibility */
+  --size-h1: clamp(2.2rem, 1.5rem + 2.8vw, 3.4rem);   /* Header — ExtraBold */
+  --size-h2: clamp(1.5rem, 1.3rem + 1vw, 1.95rem);    /* Sub-header — Bold */
+  --size-body: 1rem;                                   /* Body — Regular */
+  --size-cta: 0.95rem;                                 /* CTA — Bold, 14pt */
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+  --max-w: 1180px;
+  --shadow: 0 6px 24px rgba(11,13,111,0.08);
+  --shadow-lg: 0 16px 44px rgba(11,13,111,0.14);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--text-body);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--size-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a{ color:inherit; }
+img, svg{ display:block; max-width:100%; }
+
+.container{
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 56px);
+  position: relative;
+}
+
+a:focus-visible, button:focus-visible{
+  outline: 2px solid var(--glowing-blue);
+  outline-offset: 3px;
+}
+
+/* ================= NAV ================= */
+.topnav{
+  position: sticky; top:0; z-index: 40;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topnav-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 14px clamp(20px,4vw,56px);
+  max-width: var(--max-w); margin:0 auto;
+}
+.brand-logo{ height: 46px; width:auto; display:block; }
+
+/* Digital Tech Solutions has no separate logo file in the brand
+   guidelines supplied (that PDF is GenioMD's own brand book), so
+   the parent site gets a text wordmark in the same brand voice
+   instead of borrowing GenioMD's mark. Swap for a real DTS logo
+   file the moment one exists. */
+.dts-wordmark{
+  display:inline-flex; align-items:center; gap:8px;
+  font-weight: 800; font-size: 1.1rem; letter-spacing:-0.01em;
+  text-decoration:none; color: var(--navy-blue);
+}
+.dts-wordmark::before{
+  content:""; width:11px; height:11px; border-radius:50%;
+  background: var(--brand-gradient); display:inline-block; flex-shrink:0;
+}
+.dts-wordmark span{ color: var(--glowing-blue); font-weight:800; }
+.dts-wordmark-sm{ font-size: 0.95rem; }
+.nav-links{
+  display:flex; flex-wrap: wrap; align-items:center; gap: 10px;
+  list-style:none; margin:0; padding:0; font-size: 0.92rem; font-weight: 600;
+  justify-content: flex-end;
+}
+.nav-links a{
+  text-decoration:none; color: var(--navy-blue);
+  display:inline-block; padding: 10px 18px;
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  transition: background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
+  white-space: nowrap;
+}
+.nav-links a:hover{ border-color: var(--glowing-blue); color: var(--glowing-blue); transform: translateY(-1px); }
+.nav-links .tab{
+  background: var(--glowing-blue);
+  color: var(--white) !important;
+  border-color: var(--glowing-blue);
+  font-weight: 700;
+}
+.nav-links .tab:hover{ background: var(--navy-blue); border-color: var(--navy-blue); color: var(--white) !important; }
+
+@media (max-width: 700px){
+  .topnav-inner{ flex-wrap: wrap; row-gap: 12px; padding-top:12px; padding-bottom:12px; }
+  .nav-links{ width:100%; justify-content: flex-start; }
+  .nav-links a{ padding: 8px 14px; font-size: 0.85rem; }
+  .brand-logo{ height: 36px; }
+  .dts-wordmark{ font-size: 1rem; }
+}
+
+/* ================= DECORATIVE BLOBS (echoes the logo mark) ================= */
+.blob-field{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+.blob{
+  position:absolute; border-radius:50%;
+  background: var(--brand-gradient);
+  filter: blur(2px);
+  opacity: 0.16;
+}
+.section-dark .blob{ opacity: 0.5; }
+.dotline{ position:absolute; inset:0; z-index:0; opacity:0.5; pointer-events:none; }
+
+/* ================= TYPE ================= */
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size: 0.85rem; font-weight: 600; color: var(--glowing-blue);
+  background: #EEF0FE; padding: 7px 16px; border-radius: var(--radius-pill);
+  margin: 0 0 22px;
+}
+.eyebrow::before{
+  content:""; width:8px; height:8px; border-radius:50%;
+  background: var(--brand-gradient); display:inline-block;
+}
+
+h1{
+  font-weight: 800; font-size: var(--size-h1); line-height: 1.12;
+  letter-spacing: -0.015em; margin: 0 0 20px; color: var(--navy-blue);
+}
+h2{ font-weight: 700; font-size: var(--size-h2); line-height: 1.25; letter-spacing:-0.005em; margin:0 0 14px; color: var(--navy-blue); }
+h3{ font-weight: 600; font-size: 1.15rem; margin: 0 0 10px; color: var(--navy-blue); }
+.subhead{ font-size: 1.08rem; font-weight:400; max-width: 48ch; margin:0 0 20px; }
+.grounding{
+  font-size: 0.98rem; font-weight:500;
+  color: var(--deep-purple);
+  border-left: 3px solid var(--bright-azure);
+  padding-left: 14px; margin: 0 0 32px; max-width: 46ch;
+}
+p{ margin: 0 0 16px; }
+
+/* ================= CTAs (pill, per business-card "Learn More") ================= */
+.cta-row{ display:flex; flex-wrap:wrap; gap: 14px; position:relative; z-index:1; }
+.btn{
+  font-family: var(--font-display); font-weight: 700; font-size: var(--size-cta);
+  text-decoration:none; padding: 15px 28px; border-radius: var(--radius-pill);
+  display:inline-flex; align-items:center; gap:8px; border: 1px solid transparent;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn-primary{ background: var(--navy-blue); color: var(--white); box-shadow: var(--shadow); }
+.btn-primary:hover{ background: var(--glowing-blue); box-shadow: var(--shadow-lg); }
+.btn-secondary{ background: var(--white); color: var(--navy-blue); border-color: var(--border); }
+.btn-secondary:hover{ border-color: var(--glowing-blue); color: var(--glowing-blue); }
+.btn-onlight{ background: var(--white); color: var(--navy-blue); }
+.btn-onlight:hover{ background: var(--aqua-blue); }
+
+/* ================= HERO ================= */
+.hero{ padding: 64px 0 88px; position:relative; overflow:hidden; }
+.hero-grid{
+  display:grid; grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(30px,5vw,64px); align-items:center;
+  position:relative; z-index:1;
+}
+@media (max-width: 900px){ .hero-grid{ grid-template-columns: 1fr; } }
+
+.hero-card{
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow:hidden;
+}
+.hero-card::before{
+  content:"";
+  position:absolute; top:-70px; right:-70px;
+  width:180px; height:180px; border-radius:50%;
+  background: var(--brand-gradient);
+  opacity:0.14;
+}
+.stat-row{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  margin-bottom: 14px; position:relative;
+}
+.stat{
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+.stat .num{ font-weight:800; font-size:1.35rem; color: var(--glowing-blue); }
+.stat .lbl{ font-size: 0.82rem; color: var(--text-body); margin-top:2px; }
+.badge-row{ display:flex; flex-wrap:wrap; gap:8px; position:relative; }
+.badge{
+  font-size: 0.78rem; font-weight:600; color: var(--navy-blue);
+  background: #EEF0FE; padding: 6px 13px; border-radius: var(--radius-pill);
+}
+
+/* ================= SECTIONS ================= */
+section{ padding: 78px 0; position:relative; }
+.section-alt{ background: var(--bg-alt); }
+.section-dark{
+  background: var(--navy-blue);
+  color: #C7CBEE;
+  overflow:hidden;
+}
+.section-dark h2, .section-dark h3{ color: var(--white); }
+.section-dark .subhead{ color: #C7CBEE; }
+.section-dark .eyebrow{ background: rgba(255,255,255,0.1); color: var(--aqua-blue); }
+.readout{
+  font-size: 0.82rem; font-weight:700; letter-spacing:0.04em;
+  color: var(--mint-blue); text-transform: uppercase; display:block; margin-bottom: 10px;
+}
+.section-dark .readout{ color: var(--aqua-blue); }
+.section-head{ max-width: 62ch; margin-bottom: 44px; position:relative; z-index:1; }
+
+/* ================= CARD GRID ================= */
+.card-grid{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position:relative; z-index:1;
+}
+.card-grid.cols-2{ grid-template-columns: repeat(2,1fr); }
+@media (max-width: 880px){ .card-grid, .card-grid.cols-2{ grid-template-columns: 1fr; } }
+.card{
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+.card:hover{ box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.card-icon{
+  width: 44px; height:44px; border-radius: var(--radius-sm);
+  background: var(--brand-gradient); color: var(--white);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; margin-bottom: 14px;
+}
+.card p{ margin-bottom:0; font-size: 0.97rem; }
+
+/* ================= PROOF STRIP ================= */
+.proof-strip{
+  display:flex; flex-wrap:wrap; gap: 26px 42px;
+  margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.14);
+  font-size: 0.88rem; position:relative; z-index:1;
+}
+.proof-strip b{ display:block; color: var(--white); font-size: 1rem; margin-top:2px; }
+
+/* ================= ENTITIES ================= */
+.entity-mark{ height: 36px; width:auto; margin-bottom: 14px; position:relative; z-index:1; }
+.entity{
+  padding: 32px 28px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position:relative; overflow:hidden;
+}
+.entity::after{
+  content:""; position:absolute; bottom:-40px; left:-40px;
+  width:120px; height:120px; border-radius:50%;
+  background: var(--brand-gradient); opacity:0.10;
+}
+.entity a.link{
+  display:inline-flex; align-items:center; gap:6px; margin-top:16px; font-weight:600; font-size:0.94rem;
+  color: var(--glowing-blue); text-decoration:none; position:relative; z-index:1;
+}
+.entity a.link:hover{ color: var(--navy-blue); }
+
+/* ================= SPLIT ENGINES (GenioMD) ================= */
+.split{ display:grid; grid-template-columns: 1fr 1fr; gap: 20px; position:relative; z-index:1; }
+@media (max-width: 880px){ .split{ grid-template-columns: 1fr; } }
+.split-col{
+  background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px 26px; box-shadow: var(--shadow);
+}
+.split-col .pill{
+  display:inline-block; font-size:0.78rem; font-weight:700;
+  color: var(--white); background: var(--glowing-blue);
+  padding: 7px 16px; border-radius: var(--radius-pill); margin-bottom:16px;
+}
+.split-col.col-b .pill{ background: var(--mint-blue); }
+.split-col p{ font-size: 0.96rem; }
+
+.demo-box{
+  font-size: 0.85rem;
+  background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 14px 16px; margin-top: 12px;
+}
+.demo-box .row{ display:flex; gap:8px; padding: 5px 0; }
+.demo-box .flag{ color: var(--deep-purple); font-weight:700; }
+.demo-box .ok{ color: var(--mint-blue); font-weight:700; }
+.demo-box .t{ margin-left:auto; color: var(--text-body); }
+
+/* ================= CREDIBILITY ================= */
+.credibility{ max-width: 72ch; position:relative; z-index:1; }
+.credibility p{ font-size: 1.03rem; }
+
+/* ================= CLOSING ================= */
+.closing{
+  text-align:center; padding: 88px 0 96px;
+  background: var(--brand-gradient);
+  color: var(--white); border-radius: var(--radius);
+  margin: 0 clamp(20px,4vw,56px);
+  position:relative; overflow:hidden;
+}
+.closing .container{ max-width: 640px; }
+.closing h2{ color: var(--white); }
+.closing .readout{ color: rgba(255,255,255,0.9); }
+.closing .eyebrow{ background: rgba(255,255,255,0.16); color: var(--white); }
+.closing .cta-row{ justify-content:center; }
+
+footer{
+  padding: 32px 0 44px; font-size: 0.85rem; color: var(--text-body);
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+}
+footer .brand-logo{ height:34px; }
+
+/* ================= CONTACT FORM ================= */
+.contact-form{
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 34px 32px;
+  box-shadow: var(--shadow-lg);
+  text-align:left;
+  max-width: 520px;
+  margin: 0 auto;
+  position:relative; z-index:1;
+}
+.contact-form .field{ margin-bottom: 16px; }
+.contact-form label{
+  display:block; font-size: 0.85rem; font-weight:600;
+  color: var(--navy-blue); margin-bottom: 6px;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea{
+  width:100%; font-family: var(--font-display); font-size: 0.95rem;
+  padding: 12px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--bg-alt);
+  color: var(--navy-blue); resize: vertical;
+}
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus{
+  outline: 2px solid var(--glowing-blue); outline-offset:1px; background: var(--white);
+}
+.contact-form .field-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 520px){ .contact-form .field-row{ grid-template-columns: 1fr; } }
+.contact-form .btn{ width:100%; justify-content:center; border:none; cursor:pointer; }
+.contact-form .form-note{
+  font-size: 0.78rem; color: var(--text-body); margin-top: 12px; text-align:center;
+}
+.form-success{
+  display:none; text-align:center; padding: 40px 20px;
+  background: var(--white); border-radius: var(--radius);
+  box-shadow: var(--shadow-lg); max-width: 520px; margin: 0 auto; color: var(--navy-blue);
+  position:relative; z-index:1;
+}
+.form-success.show{ display:block; }
+.contact-form.hide{ display:none; }
+
+/* ================= MOBILE TUNING ================= */
+@media (max-width: 700px){
+  .hero{ padding: 40px 0 56px; }
+  section{ padding: 52px 0; }
+  .closing{ padding: 56px 0 64px; margin: 0 16px; }
+  h1{ line-height: 1.18; }
+  .section-head{ margin-bottom: 30px; }
+  .hero-card{ padding: 22px; }
+  .stat-row{ gap: 10px; }
+  .stat{ padding: 12px; }
+  .stat .num{ font-size: 1.15rem; }
+  .contact-form{ padding: 24px 20px; }
+  .entity, .card, .split-col{ padding: 24px 20px; }
+  .cta-row{ flex-direction: column; align-items: stretch; }
+  .cta-row .btn{ text-align:center; justify-content:center; width:100%; }
+  footer .container{ flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+@media (max-width: 400px){
+  .stat-row{ grid-template-columns: 1fr; }
+}
