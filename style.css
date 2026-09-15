@@ -259,7 +259,7 @@ section{ padding: 78px 0; position:relative; }
 
 /* ================= CARD GRID ================= */
 .card-grid{
-  display:grid; grid-template-columns: repeat(3, 3fr); gap: 20px; position:relative; z-index:1;
+  display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position:relative; z-index:1;
 }
 .card-grid.cols-2{ grid-template-columns: repeat(2,1fr); }
 @media (max-width: 880px){ .card-grid, .card-grid.cols-2{ grid-template-columns: 1fr; } }
